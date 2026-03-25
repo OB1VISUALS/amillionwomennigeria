@@ -8,9 +8,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://wrhyzuqchigrvvouodho.supabase.co/storage/v1/object/public/Image/Favico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://wrhyzuqchigrvvouodho.supabase.co/storage/v1/object/public/Image/Favico/favicon-16x16.png">
     <link rel="manifest" href="https://wrhyzuqchigrvvouodho.supabase.co/storage/v1/object/public/Image/Favico/site.webmanifest">
+    <!-- Optional fallback .ico -->
     <link rel="icon" type="image/x-icon" href="https://wrhyzuqchigrvvouodho.supabase.co/storage/v1/object/public/Image/Favico/favicon.ico">
 
-    <title>A Million Women Nigeria</title>
+    <title>A Million Women Nigera</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -45,6 +46,7 @@
             background: #888;
         }
 
+        /* ===== ADDITIONAL MINIMAL ANIMATIONS ===== */
         @keyframes fadeInUp {
             0% { opacity: 0; transform: translateY(20px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -74,14 +76,6 @@
         button[type="submit"]:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .social-icon {
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-        .social-icon:hover {
-            opacity: 0.7;
-            transform: scale(1.1);
         }
     </style>
 </head>
@@ -117,53 +111,24 @@
             <div class="flex flex-col items-center lg:items-center text-center space-y-8 pt-4">
                 <div class="space-y-1">
                     <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter text-black leading-[0.9]">
-                      A Million Women Nigeria Solemn Assembly
+                      A MillIon Women Nigeria Solemn Asssembly
                     </h1>
                     <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter text-outline leading-[0.9]">
                         Sign Up To Receive Updates
                     </h2>
                 </div>
-
-                <!-- SOCIAL ICONS (MAIN SECTION) -->
-                <div class="flex justify-center space-x-6 pt-4">
-                    <!-- YouTube -->
-                    <a href="https://www.youtube.com/@AMillionWomenAfrica" target="_blank" rel="noopener noreferrer" class="social-icon text-black" aria-label="YouTube">
-                        <i data-lucide="youtube" class="w-8 h-8 stroke-[1.5]"></i>
-                    </a>
-                    <!-- Instagram -->
-                    <a href="https://www.instagram.com/amillionwomennigeria/" target="_blank" rel="noopener noreferrer" class="social-icon text-black" aria-label="Instagram">
-                        <i data-lucide="instagram" class="w-8 h-8 stroke-[1.5]"></i>
-                    </a>
-                    <!-- TikTok (custom) -->
-                    <a href="https://www.tiktok.com/@amillionwomennige" target="_blank" rel="noopener noreferrer" class="social-icon text-black" aria-label="TikTok">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-                        </svg>
-                    </a>
-                    <!-- Facebook -->
-                    <a href="https://web.facebook.com/profile.php?id=61588416371795&mibextid=wwXIfr&rdid=jnmn5A5Zy3MQniRB&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1BhJ4wH1CD%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" class="social-icon text-black" aria-label="Facebook">
-                        <i data-lucide="facebook" class="w-8 h-8 stroke-[1.5]"></i>
-                    </a>
-                </div>
             </div>
 
-            <!-- Right Column: Contact Form -->
+            <!-- Right Column: Contact Form (ALL FIELDS ARE NOW REQUIRED) -->
             <div class="w-full max-w-xl mx-auto lg:mx-0">
                 <form
                 id="register-form" 
                 name="register"
                 class="space-y-6"
-                action="/"
+                action="/thank-you"
                 method="POST" 
-                action="https://hooks.zapier.com/hooks/catch/26863239/uptm2wc/"
-                data-netlify="true"
-                netlify-honeypot="bot-field">
+                data-netlify="true">
                 <input type="hidden" name="form-name" value="register" />
-                <!-- Honeypot (hidden) -->
-                <p class="hidden">
-                    <label>Don’t fill this: <input name="bot-field" /></label>
-                </p>
-
                     <!-- Name Fields -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
@@ -233,8 +198,7 @@
           const formData = new FormData(form);
       
           try {
-            // Use the current page URL instead of a custom /thank-you
-            const response = await fetch(window.location.href, {
+            const response = await fetch(form.action, {
               method: 'POST',
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
               body: new URLSearchParams(formData).toString(),
@@ -250,20 +214,9 @@
             alert('Submission failed. Check your internet.');
           }
         });
-    </script>
-
-    <!-- ===== DONATE SECTION (added as requested) ===== -->
-    <div class="w-full bg-white px-6 py-16 md:py-20 lg:px-12 border-t border-b border-gray-200">
-        <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-6xl md:text-7xl font-black uppercase tracking-tighter text-black leading-[0.9] mb-4">DONATE</h2>
-            <p class="text-2xl md:text-3xl font-bold uppercase tracking-wide text-gray-800 mb-6">ESTHER PRAYER INITIATIVE</p>
-            <p class="font-mono text-4xl md:text-5xl font-black tracking-wider text-black mb-2">1309176234</p>
-            <p class="font-mono text-xl md:text-2xl font-medium text-gray-700 uppercase">PROVIDUS BANK</p>
-           
-        </div>
-    </div>
+      </script>
    
-    <!-- FOOTER (with social icons) -->
+    <!-- ===== PROFESSIONAL FOOTER (updated with flyer text) ===== -->
     <div class="relative bg-black w-full pt-20 pb-8 mt-12">
         
         <!-- Torn Paper Edge Effect at top (inverted) -->
@@ -273,7 +226,7 @@
             </svg>
         </div>
 
-        <!-- Main footer content -->
+        <!-- Main footer content (flyer layout) -->
         <div class="relative max-w-7xl mx-auto px-6 lg:px-12">
             
             <!-- Flyer Text -->
@@ -288,46 +241,20 @@
                     HIS BLOOD SETTLES IT.
                 </p>
                 <div class="text-xl md:text-2xl text-white font-mono">
-                    <p>APRIL 4TH, 2026 • 9AM – 5PM</p>
+                    <p>APRIL 4TH, 2026 • Vision Prayer Brunch</p>
                     <p class="text-base md:text-lg max-w-3xl mx-auto mt-2">
-                        THE GOODLAND, IFAKO BUS-STOP, OWOROSHOKI EXPRESSWAY, LAGOS
+                        Solemn Assembly 2026 • Date Will Be Communicated Soon
                     </p>
                 </div>
             </div>
 
-            <!-- SOCIAL ICONS (FOOTER) -->
-            <div class="flex justify-center space-x-8 py-6">
-                <!-- YouTube -->
-                <a href="https://www.youtube.com/@AMillionWomenAfrica" target="_blank" rel="noopener noreferrer" class="social-icon text-white" aria-label="YouTube">
-                    <i data-lucide="youtube" class="w-8 h-8 stroke-[1.5]"></i>
-                </a>
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/amillionwomennigeria/" target="_blank" rel="noopener noreferrer" class="social-icon text-white" aria-label="Instagram">
-                    <i data-lucide="instagram" class="w-8 h-8 stroke-[1.5]"></i>
-                </a>
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@amillionwomennige" target="_blank" rel="noopener noreferrer" class="social-icon text-white" aria-label="TikTok">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-                    </svg>
-                </a>
-                <!-- Facebook -->
-                <a href="https://web.facebook.com/profile.php?id=61588416371795&mibextid=wwXIfr&rdid=jnmn5A5Zy3MQniRB&share_url=https%3A%2F%2Fweb.facebook.com%2Fshare%2F1BhJ4wH1CD%2F%3Fmibextid%3DwwXIfr%26_rdc%3D1%26_rdr" target="_blank" rel="noopener noreferrer" class="social-icon text-white" aria-label="Facebook">
-                        <i data-lucide="facebook" class="w-8 h-8 stroke-[1.5]"></i>
-                    </a>
-                </a>
-            </div>
-
             <!-- Copyright line -->
-            <div class="border-t border-white/20 mt-6 pt-6 text-center text-white/50 font-mono text-xs">
+            <div class="border-t border-white/20 mt-12 pt-6 text-center text-white/50 font-mono text-xs">
                 <p>© 2026 A Million Women Nigeria. All rights reserved. | Solemn Assembly 2026</p>
             </div>
 
         </div>
     </div>
 
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>
