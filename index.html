@@ -150,6 +150,9 @@
         body::-webkit-scrollbar-track { background: #EDE3D4; }
         body::-webkit-scrollbar-thumb { background: #EAA639; border-radius: 4px; }
 
+        /* offset so the smooth-scroll target isn't hidden under the top of the viewport */
+        #register-section { scroll-margin-top: 1rem; }
+
         /* ---- HERO BUTTON LAYOUT (responsive) ---- */
         .hero-buttons {
             display: flex;
@@ -206,7 +209,7 @@
 
             <!-- Buttons: icon + text centered via flex gap, evenly spaced, mobile responsive -->
             <div class="animate-hero delay-3 mt-8 hero-buttons">
-                <a href="" class="btn-register text-white rounded-md font-semibold tracking-wide text-sm shadow-md">Register To Attend In Your Location </a>
+                <a href="#register-section" class="btn-register text-white rounded-md font-semibold tracking-wide text-sm shadow-md">Register To Attend In Your Location </a>
                 <a href="https://selar.com/showlove/amillionwomenafrica" class="btn-give text-white rounded-md font-semibold tracking-wide text-sm shadow-md">Give Towards The Assembly </a>
                 <a href="https://www.youtube.com/@amillionwomenafrica" id="dailyPrayerLink" class="btn-prayers rounded-md font-semibold tracking-wide text-sm shadow-md border border-amber-300/40">Join The Daily Prayers at 7PM WAT</a>
                 <a href="https://app.notion.com/p/A-Million-Women-Nigeria-36c4371b0a4c8071a8e1d11757267b75?source=copy_link&assetsVersion=23.13.20260608.1420" class="btn-info text-white rounded-md font-semibold tracking-wide text-sm shadow-md">Learn More About The Assembly</a>
