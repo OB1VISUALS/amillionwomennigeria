@@ -73,7 +73,7 @@
         }
 
         /* ---- HERO BUTTONS: centered icon+text, consistent spacing, no stray gaps ---- */
-        .btn-register, .btn-give, .btn-prayers, .btn-donate, .btn-info, .btn-submit, .btn-vlt {
+        .btn-register, .btn-give, .btn-prayers, .btn-donate, .btn-info, .btn-submit, .btn-vlt, .btn-locate {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -85,8 +85,8 @@
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
-        .btn-register i, .btn-give i, .btn-prayers i, .btn-vlt i, .btn-info i, .btn-submit i,
-        .btn-register svg, .btn-give svg, .btn-prayers svg, .btn-vlt svg, .btn-info svg, .btn-submit svg, .btn-donate svg, .btn-donate i {
+        .btn-register i, .btn-give i, .btn-prayers i, .btn-vlt i, .btn-info i, .btn-submit i, .btn-locate i,
+        .btn-register svg, .btn-give svg, .btn-prayers svg, .btn-vlt svg, .btn-info svg, .btn-submit svg, .btn-donate svg, .btn-donate i, .btn-locate svg {
             display: inline-flex;
             flex-shrink: 0;
             margin: 0;
@@ -112,6 +112,15 @@
         .btn-vlt {
             background-color: #dedf55;
             color: #000000;
+        }
+        .btn-locate {
+            background-color: #2E8B6E;
+            border: none;
+            color: white;
+        }
+        .btn-locate:hover {
+            background-color: #23705a;
+            transform: translateY(-2px);
         }
         .btn-give:hover {
             background-color: #d15436;
@@ -693,6 +702,9 @@
             <a href="#register-section" class="btn-register mobile-menu-link" aria-label="Register to attend in your location">
                 <i data-lucide="user-plus" class="w-4 h-4"></i> Register To Attend
             </a>
+            <a href="#locations-section" class="btn-locate mobile-menu-link" aria-label="Find your nearest Solemn Assembly location">
+                <i data-lucide="map-pin" class="w-4 h-4"></i> Find Your Location
+            </a>
             <a href="https://selar.com/showlove/amillionwomenafrica" target="_blank" rel="noopener noreferrer" class="btn-donate mobile-menu-link" aria-label="Donate to the Solemn Assembly">
                 <i data-lucide="heart" class="w-4 h-4"></i> Donate To The Solemn Assembly
             </a>
@@ -745,6 +757,9 @@
             <div class="animate-hero delay-3 mt-8 hero-buttons">
                 <a href="#register-section" id="registerBtn" class="btn-register" aria-label="Register to attend in your location">
                     <i data-lucide="user-plus" class="w-4 h-4"></i> Register To Attend In Your Location
+                </a>
+                <a href="#locations-section" id="locateBtn" class="btn-locate" aria-label="Find your nearest Solemn Assembly location">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i> Find Your Location
                 </a>
                 <a href="https://selar.com/showlove/amillionwomenafrica" id="donateBtn" class="btn-donate" aria-label="Donate to the Solemn Assembly">
                     <i data-lucide="user-plus" class="w-4 h-4"></i> Donate to the Solemn Assembly
@@ -971,6 +986,21 @@
                 registerBtn.addEventListener('click', scrollToRegister);
                 registerBtn.addEventListener('touchstart', function() {}, { passive: true });
             }
+
+            // ── Scroll to locations (Find Your Location CTA) ──
+            const locateBtn = document.getElementById('locateBtn');
+            const locationsSection = document.getElementById('locations-section');
+            function scrollToLocations(e) {
+                if (e) e.preventDefault();
+                if (!locationsSection) return;
+                locationsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (history.pushState) history.pushState(null, null, '#locations-section');
+                else window.location.hash = 'locations-section';
+            }
+            if (locateBtn && locationsSection) {
+                locateBtn.addEventListener('click', scrollToLocations);
+                locateBtn.addEventListener('touchstart', function() {}, { passive: true });
+            }
             if (window.location.hash === '#register-section' && registerSection) {
                 window.addEventListener('load', function() {
                     setTimeout(function() {
@@ -1114,15 +1144,17 @@
                 mobileMenu.addEventListener('click', function(e) {
                     var link = e.target.closest('a');
                     if (!link) return;
-                    if (link.getAttribute('href') === '#register-section') {
+                    var href = link.getAttribute('href') || '';
+                    if (href.charAt(0) === '#') {
                         e.preventDefault();
+                        var target = document.getElementById(href.slice(1));
                         closeMenu(false);
                         // wait for the body scroll position to be restored,
                         // then run the smooth scroll from the correct offset
                         setTimeout(function() {
-                            if (registerSection) {
-                                registerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                if (history.pushState) history.pushState(null, null, '#register-section');
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                if (history.pushState) history.pushState(null, null, href);
                             }
                         }, 60);
                     } else {
